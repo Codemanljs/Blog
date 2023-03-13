@@ -1,8 +1,8 @@
 package com.ljs.blog.utils;
 
-import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class RedisUtil {
         if (key==null){
             return false;
         }
-        redisTemplate.opsForValue().getAndDelete(key);
+        redisTemplate.delete(key);
         return true;
     }
 

@@ -3,17 +3,18 @@ package com.ljs.blog.service.impl;
 import com.ljs.blog.mapper.SystemMapper;
 import com.ljs.blog.pojo.User;
 import com.ljs.blog.service.SystemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author ljs
  * @create 2023-03-09 14:56
  */
-@Service
+@Service(value = "systemService")
 public class SystemServiceImpl implements SystemService {
 
-    @Autowired
+    @Resource
     SystemMapper systemMapper;
 
     @Override

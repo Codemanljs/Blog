@@ -19,30 +19,31 @@ public class JwtHelper {
 
 
     //创建token
-    public static String createToken(String userType,String username,Integer userId){
+    public static String createToken(Integer userId,String username,String password){
         String token = Jwts.builder()
                 .setSubject("creatToken")
                 .setExpiration(new Date(System.currentTimeMillis() + tokenEXP))
                 .signWith(SignatureAlgorithm.HS512, tokenKey)
-                .claim("userType", userType)
-                .claim("username", username)
                 .claim("userId", userId)
+                .claim("username", username)
+                .claim("password", password)
                 .compressWith(CompressionCodecs.GZIP)
                 .compact();
         return token;
     }
 
-    //从token中解析获得userType
-    public String getUserType(String token){
+
+    //从token中解析获得password
+    public static String getPassword(String token){
         if (token==null){
             return null;
         }
         Claims body = Jwts.parser().parseClaimsJws(token).getBody();
-        String userType = (String) body.get("userType");
-        return userType;
+        String password = (String) body.get("password");
+        return password;
     }
     //从token中解析获得userId
-    public String getUserId(String token){
+    public static String getUserId(String token){
         if (token==null){
             return null;
         }
@@ -51,7 +52,7 @@ public class JwtHelper {
         return userId;
     }
     //从token中解析获得username
-    public String getUsername(String token){
+    public static String getUsername(String token){
         if (token==null){
             return null;
         }

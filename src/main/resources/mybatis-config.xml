@@ -5,16 +5,24 @@
 
 
 <configuration>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
     <!--配置连接数据库的环境-->
     <environments  default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="username" value="root"/>
-                <property name="password" value="ljs2000111"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/blog?useSSL=false&amp;serverTimeZone=GMT%2B8"/>
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-            </dataSource>
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="ljs2000111"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/blog?useSSL=false&amp;serverTimeZone=GMT%2B8"/>-->
+<!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--            </dataSource>-->
         </environment>
 </environments>
     <!--引入mybatis的映射文件-->
@@ -22,5 +30,7 @@
         <!--批量的引入映射文件-->
         <package name="com.ljs.blog.mapper"/>
     </mappers>
+    
+
 
 </configuration>

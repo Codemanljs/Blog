@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ljs.blog.mapper.EssayMapper">
+
+    <select id="selectAllByOpr" resultType="Essay">
+        select * from t_essay
+            <where>
+                <if test="essayName!=null || essayName!=''">
+                    title like #{essayName}
+                </if>
+            </where>
+    </select>
+
+    <delete id="deleteEssayById">
+        delete from t_essay where essay_id=#{essayId}
+    </delete>
+
+    <update id="updateEssayContent">
+        update t_essay set content=#{content} where essay_id=#{essayId}
+    </update>
+
+    <insert id="insertEssay">
+        insert into t_essay values (#{essayId},#{userId},#{title},#{content},#{views},#{createTime},#{likeCount})
+    </insert>
+</mapper>

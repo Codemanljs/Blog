@@ -1,6 +1,8 @@
 package com.ljs.blog.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
@@ -14,6 +16,8 @@ import java.util.Date;
  * 文章类
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Essay implements Serializable {
 
     private Integer essayId;

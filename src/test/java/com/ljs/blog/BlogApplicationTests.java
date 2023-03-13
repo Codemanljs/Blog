@@ -1,5 +1,7 @@
 package com.ljs.blog;
 
+import com.ljs.blog.controller.SystemController;
+import com.ljs.blog.pojo.LoginForm;
 import com.ljs.blog.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,26 +15,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-//@SpringBootTest
-@SpringJUnitWebConfig
+@SpringBootTest
 class BlogApplicationTests {
 
     @Test
     void contextLoads() {
-
-        /*String resource= "mybatis-config.xml";
-        InputStream inputStream = null;
-        try {
-            inputStream = Resources.getResourceAsStream(resource);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        List<User> list = sqlSession.selectOne("select * from t_user");
-        for(User user:list){
-            System.out.println(user);
-        }*/
 
     }
 

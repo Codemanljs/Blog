@@ -5,12 +5,10 @@ import com.ljs.blog.pojo.RegisterForm;
 import com.ljs.blog.pojo.User;
 import com.ljs.blog.service.SystemService;
 import com.ljs.blog.utils.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author ljs
@@ -19,25 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/blog")
 public class SystemController {
 
-    @Autowired
+    @Resource
     SystemService systemService;
 
+
     //登录功能
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody LoginForm loginForm){
         String username = loginForm.getUsername();
         String password = loginForm.getPassword();
-
-            User user=systemService.selectOne(username,password);
-            if (user==null){
-                return Result.fail().message("用户不存在!");
+        User user=systemService.selectOne(username,password);
+        if (user!=null){
+            if (!username.equals(user.getUsername()) || !password.equals(user.getPassword())){
+                return Result.fail().message("用户名或密码错误!请重新登录!");
             }else {
-                if (!username.equals(user.getUsername()) || !password.equals(user.getPassword())){
-                    return Result.fail().message("用户名或密码错误!请重新登录!");
-                }
+                Integer userId = user.getUserId();
+                String token = JwtHelper.createToken(userId, username, password);
+                RedisUtil.set("token",token);
+                return Result.ok(token);
             }
-            return Result.ok();
+        }else {
+            return Result.fail().message("用户不存在!");
         }
+    }
 
 
     //注册功能
